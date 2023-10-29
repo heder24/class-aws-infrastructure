@@ -48,7 +48,7 @@ on:
   push:
     branches: [ "main" ]
   pull_request: 
-    # branches: [ "main" ] 
+    branches: [ "main" ] 
 
 permissions: write-all
   # contents: read
@@ -100,7 +100,7 @@ jobs:
 
     - name: Terraform Destroy
       env:
-        destroy: true
+        destroy: false
       if: ${{ env.destroy == 'true' }} 
       run: terraform destroy -auto-approve -input=false
 
