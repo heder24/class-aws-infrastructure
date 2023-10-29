@@ -63,7 +63,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: "./us-east-2"
+        working-directory: "./"
 
     steps:
     # Checkout the repository to the GitHub Actions runner
