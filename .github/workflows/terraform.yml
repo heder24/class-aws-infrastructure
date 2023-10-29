@@ -122,7 +122,7 @@ jobs:
 
        # Scan Terraform Config for Vulnerabilities
     - name: Run Trivy vulnerability scanner in IaC mode
-      uses: aquasecurity/trivy-action@main
+      uses: aquasecurity/trivy-action@master
       with:
         scan-type: 'config'
         hide-progress: false
