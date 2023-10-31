@@ -63,7 +63,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: "/test"
+        working-directory: "./test"
 
     steps:
     # Checkout the repository to the GitHub Actions runner
