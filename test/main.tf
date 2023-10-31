@@ -3,7 +3,7 @@
 ################################################################################
 
 module "vpc" {
-  source = "app.terraform.io/heder24/project/aws/"
+  source = "app.terraform.io/heder24/vpc/aws"
 
   name = local.name
   cidr = local.vpc_cidr
