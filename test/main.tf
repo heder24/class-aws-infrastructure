@@ -224,7 +224,7 @@ number_of_computed_egress_with_source_security_group_id = 1
 ###################################### IAM #################################
 
 module "base-ec2-role" {
-  source = "app.terraform.io/heder24/iam/modules/iam-assumable-role/aws"
+  source = "app.terraform.io/heder24/iam/aws//modules/iam-assumable-role"
 
   trusted_role_services = [
     "ec2.amazonaws.com"
@@ -244,7 +244,7 @@ module "base-ec2-role" {
 }
 
 module "ec2-code-deploy" {
-  source = "app.terraform.io/heder24/iam/modules/iam-assumable-role/aws"
+  source = "app.terraform.io/heder24/iam/aws//modules/iam-assumable-role"
 
   trusted_role_services = [
     "codedeploy.amazonaws.com"
@@ -263,7 +263,7 @@ module "ec2-code-deploy" {
 # IAM SNS policy
 #########################################
 module "iam_policy" {
-  source = "app.terraform.io/heder24/iam/modules/iam-policy/aws"
+  source = "app.terraform.io/heder24/iam/aws/modules/iam-policy/"
 
   name = "sns-publish-1"
   path = "/"
@@ -316,7 +316,7 @@ module "acm" {
 ############################### Route53 Records #############################
 
 module "dns_records" {
-  source = "app.terraform.io/heder24/route53/modules/records/aws"
+  source = "app.terraform.io/heder24/route53/aws//modules/records"
   zone_id = local.zone_id
    records = [
     {
