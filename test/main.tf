@@ -579,7 +579,7 @@ module "prod_bastion" {
   key_name = var.key_name
   iam_instance_profile= module.base-ec2-role.iam_instance_profile_id
   create_iam_instance_profile = false
-  # user_data_base64            = base64encode(local.user_data)
+  user_data              = base64encode(file("user-data.sh"))
   user_data_replace_on_change = true
   tags = {
     Name = var.bastion
