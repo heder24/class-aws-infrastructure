@@ -566,7 +566,7 @@ module "prod_asg" {
 ################################################################################
 
 module "prod_bastion" {
-  source = "../../modules/ec2"
+  source = "app.terraform.io/heder24/autoscaling/aws"
 
   name = var.bastion
   ami                         = data.aws_ami.ubuntu.id
