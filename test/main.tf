@@ -293,10 +293,10 @@ module "base-ec2-role" {
 module "acm" {
   source ="app.terraform.io/heder24/acm/aws"
 
-  # providers = {
-  #   aws.acm = aws,
-  #   aws.dns = aws
-  # }
+  providers = {
+    aws.acm = aws,
+    aws.dns = aws
+  }
 
   domain_name = local.domain_name
   zone_id     = local.zone_id
