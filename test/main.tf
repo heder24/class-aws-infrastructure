@@ -243,21 +243,21 @@ module "base-ec2-role" {
   ]
 }
 
-module "ec2-code-deploy" {
-  source = "app.terraform.io/heder24/iam/aws"
+# module "ec2-code-deploy" {
+#   source = "app.terraform.io/heder24/iam/aws"
 
-  trusted_role_services = [
-    "codedeploy.amazonaws.com"
-  ]
+#   trusted_role_services = [
+#     "codedeploy.amazonaws.com"
+#   ]
 
-  create_role = true
+#   create_role = true
 
-  role_name = "ec2-code-deploy-1"
-  custom_role_policy_arns = ["arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole",
-    module.iam_policy.arn
-  ]
+#   role_name = "ec2-code-deploy-1"
+#   custom_role_policy_arns = ["arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole",
+#     module.iam_policy.arn
+#   ]
 
-}
+# }
 
 #########################################
 # IAM SNS policy
@@ -293,10 +293,10 @@ module "ec2-code-deploy" {
 module "acm" {
   source ="app.terraform.io/heder24/acm/aws"
 
-  providers = {
-    aws.acm = aws,
-    aws.dns = aws
-  }
+  # providers = {
+  #   aws.acm = aws,
+  #   aws.dns = aws
+  # }
 
   domain_name = local.domain_name
   zone_id     = local.zone_id
