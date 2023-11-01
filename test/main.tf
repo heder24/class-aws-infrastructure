@@ -263,7 +263,7 @@ module "ec2-code-deploy" {
 # IAM SNS policy
 #########################################
 module "iam_policy" {
-  source = "app.terraform.io/heder24/iam/aws"
+  source ="app.terraform.io/heder24/iam/aws"
 
   name = "sns-publish-1"
   path = "/"
@@ -291,7 +291,7 @@ EOF
 # }
 
 module "acm" {
-  source = "app.terraform.io/heder24/acm/aws"
+  source ="app.terraform.io/heder24/acm/aws"
 
   providers = {
     aws.acm = aws,
@@ -566,7 +566,7 @@ module "prod_asg" {
 ################################################################################
 
 module "prod_bastion" {
-  source = "app.terraform.io/heder24/ec2/aws"
+  source = "../../modules/ec2"
 
   name = var.bastion
   ami                         = data.aws_ami.ubuntu.id
@@ -579,7 +579,7 @@ module "prod_bastion" {
   key_name = var.key_name
   iam_instance_profile= module.base-ec2-role.iam_instance_profile_id
   create_iam_instance_profile = false
-  user_data              = base64encode(file("user-data.sh"))
+  # user_data_base64            = base64encode(local.user_data)
   user_data_replace_on_change = true
   tags = {
     Name = var.bastion
