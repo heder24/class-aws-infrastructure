@@ -86,9 +86,9 @@ jobs:
     #   run: terraform fmt -check
 
     # Generates an execution plan for Terraform
-    - name: Terraform Plan
-      id: plan
-      run: terraform plan -input=false -no-color
+    # - name: Terraform Plan
+    #   id: plan
+    #   run: terraform plan -input=false -no-color
 
    # Add a comment to pull requests with plan results
     - name: add-plan-comment
