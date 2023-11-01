@@ -4,7 +4,7 @@ terraform {
     organization = "heder24"
 
     workspaces {
-      name = "terraform-gha"
+      name = "terraform-test"
     }
   }
 }
