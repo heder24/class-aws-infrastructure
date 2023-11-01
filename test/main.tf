@@ -262,25 +262,25 @@ module "ec2-code-deploy" {
 #########################################
 # IAM SNS policy
 #########################################
-module "iam_policy" {
-  source ="app.terraform.io/heder24/iam/aws"
+# module "iam_policy" {
+#   source ="app.terraform.io/heder24/iam/aws"
 
-  name = "sns-publish-1"
-  path = "/"
+#   name = "sns-publish-1"
+#   path = "/"
 
-  policy = <<EOF
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": "sns:Publish",
-            "Resource": "*"
-        }
-    ]
-}
-EOF
-}
+#   policy = <<EOF
+# {
+#     "Version": "2012-10-17",
+#     "Statement": [
+#         {
+#             "Effect": "Allow",
+#             "Action": "sns:Publish",
+#             "Resource": "*"
+#         }
+#     ]
+# }
+# EOF
+# }
 
 ########################################### ACM ##############################################
 
