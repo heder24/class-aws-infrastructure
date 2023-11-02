@@ -40,10 +40,10 @@ module "vpc" {
 module "acm" {
   source  = "app.terraform.io/heder24/acm/aws"
   version = "1.0.0"
-  providers = {
-    aws.acm = aws,
-    aws.dns = aws
-  }
+  # providers = {
+  #   aws.acm = aws,
+  #   aws.dns = aws
+  # }
 
   domain_name = local.domain_name
   zone_id     = local.zone_id
@@ -431,7 +431,7 @@ module "security-groups" {
 
 
 module "private_sg" {
-  source = "../../modules/security groups"
+  source = "app.terraform.io/heder24/security-groups/aws"
 
   name        = var.private_sg 
   vpc_id      = module.vpc.vpc_id
@@ -488,7 +488,7 @@ module "private_sg" {
 }
 
 module "bastion_sg" {
-  source = "../../modules/security groups"
+  source = "app.terraform.io/heder24/security-groups/aws"
 
   name        = "prod-bastion-sg" 
   vpc_id      = module.vpc.vpc_id
