@@ -308,7 +308,7 @@ module "iam" {
 }
 
 module "ec2-code-deploy" {
-  source = "../../modules/iam/modules/iam-assumable-role"
+  source  = "app.terraform.io/heder24/iam/aws"
 
   trusted_role_services = [
     "codedeploy.amazonaws.com"
@@ -327,7 +327,7 @@ module "ec2-code-deploy" {
 # IAM SNS policy
 #########################################
 module "iam_policy" {
-  source = "../../modules/iam/modules/iam-policy"
+  source  = "app.terraform.io/heder24/iam/aws"
 
   name = "sns-publish-1"
   path = "/"
