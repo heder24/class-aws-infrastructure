@@ -1,6 +1,6 @@
 module "vpc" {
   source  = "app.terraform.io/heder24/vpc/aws"
-  version = "1.0.0" 
+  version = "1.0.0"
 }
 
 module "acm" {
@@ -16,7 +16,7 @@ module "alb" {
 module "autoscaling" {
   source  = "app.terraform.io/heder24/autoscaling/aws"
   version = "1.0.0"
-  name = "asg"
+  name    = "prod-asg"
 }
 
 module "ec2" {
