@@ -40,10 +40,10 @@ module "vpc" {
 module "acm" {
   source  = "app.terraform.io/heder24/acm/aws"
   version = "1.0.0"
-  # providers = {
-  #   aws.acm = aws,
-  #   aws.dns = aws
-  # }
+  providers = {
+    aws.acm = aws,
+    aws.dns = aws
+  }
 
   domain_name = local.domain_name
   zone_id     = local.zone_id
