@@ -14,10 +14,10 @@ module "alb" {
 }
 
 module "autoscaling" {
-  source  = "app.terraform.io/heder24/autoscaling/aws"
-  version = "1.0.0"
-  name    = "prod-asg"
-  min_size  = 1
+  source   = "app.terraform.io/heder24/autoscaling/aws"
+  version  = "1.0.0"
+  name     = "prod-asg"
+  min_size = 1
   max_size = 3
 }
 
@@ -34,6 +34,6 @@ module "iam" {
 module "security-groups" {
   source  = "app.terraform.io/heder24/security-groups/aws"
   version = "1.0.0"
-  
+
 }
 
