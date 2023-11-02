@@ -34,6 +34,6 @@ module "iam" {
 module "security-groups" {
   source  = "app.terraform.io/heder24/security-groups/aws"
   version = "1.0.0"
-
+  name = "prod"
 }
 
