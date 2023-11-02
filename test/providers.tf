@@ -27,7 +27,7 @@ terraform {
     organization = "heder24"
 
     workspaces {
-      name = "prod-us-east-2-infrastucture"
+      name = "test"
     }
   }
 }
