@@ -41,8 +41,8 @@ module "acm" {
   source  = "app.terraform.io/heder24/acm/aws"
   version = "1.0.0"
   providers = {
-    aws.acm = aws,
-    aws.dns = aws
+    aws.acm = "hashicorp/aws"
+    aws.dns = "hashicorp/aws"
   }
 
   domain_name = local.domain_name
