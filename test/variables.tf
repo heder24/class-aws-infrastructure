@@ -4,15 +4,15 @@ variable "number_of_instances" {
   default     = 1
 }
 #Security groups
-variable "public_sg" {
+variable "security-groups" {
   type    = string
   default = "prod-public-sg"
 }
-variable "private_sg" {
+variable "private-security-groups" {
   type    = string
   default = "prod-private-sg"
 }
-variable "bastion_sg" {
+variable "bastion-security-group" {
   type    = string
   default = "prod-bastion-sg"
 }

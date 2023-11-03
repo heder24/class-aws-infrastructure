@@ -69,7 +69,7 @@ module "alb" {
 
   vpc_id  = module.vpc.vpc_id
   subnets = module.vpc.public_subnets
-  security_groups = [module.public_sg.security_group_id]
+  security_groups = [module.security-groups.security_group_id]
   
   http_tcp_listeners = [
  
@@ -237,7 +237,7 @@ module "autoscaling" {
       delete_on_termination = true
       description           = "eth0"
       device_index          = 0
-      security_groups       = [module.private_sg.security_group_id]
+      security_groups       = [module.private-security-groups.security_group_id]
     },
 
   ]
@@ -269,7 +269,7 @@ module "ec2" {
   instance_type               = "t2.micro" # used to set core count below
   availability_zone           = element(module.vpc.azs, 0)
   subnet_id                   = element(module.vpc.public_subnets, 0)
-  vpc_security_group_ids      = [module.bastion_sg.security_group_id]
+  vpc_security_group_ids      = [module.bastion-security-group.security_group_id]
   associate_public_ip_address = true
   disable_api_stop            = false
   key_name = var.key_name
@@ -351,7 +351,7 @@ module "security-groups" {
   source  = "app.terraform.io/heder24/security-groups/aws"
   version = "1.0.0"
 
- name        = var.public_sg 
+ name        = var.security-groups 
   vpc_id      = module.vpc.vpc_id
 
   ingress_with_cidr_blocks = [
@@ -432,7 +432,7 @@ module "security-groups" {
 module "private-security-groups" {
   source = "app.terraform.io/heder24/security-groups/aws"
 
-  name        = var.private_sg 
+  name        = var.private-security-groups 
   vpc_id      = module.vpc.vpc_id
  
   computed_ingress_with_source_security_group_id = [
@@ -442,7 +442,7 @@ module "private-security-groups" {
       to_port                  = 22
       protocol                 = 6
       description              = "SSH from bastion"
-      source_security_group_id = module.bastion_sg.security_group_id
+      source_security_group_id = module.bastion-security-group.security_group_id
     },
  
     {
@@ -450,7 +450,7 @@ module "private-security-groups" {
       to_port                  = 443
       protocol                 = 6
       description              = "HTTPS"
-       source_security_group_id = module.public_sg.security_group_id
+       source_security_group_id = module.security-groups.security_group_id
     },
  
 
@@ -459,7 +459,7 @@ module "private-security-groups" {
       to_port                  = 80
       protocol                 = 6
       description              = "HTTP"
-      source_security_group_id = module.public_sg.security_group_id
+      source_security_group_id = module.security-groups.security_group_id
     },
 
   ]
@@ -518,7 +518,7 @@ module "bastion-security-group" {
       to_port                  = 22
       protocol                 = 6
       description              = "SSH"
-      source_security_group_id = module.private_sg.security_group_id
+      source_security_group_id = module.private-security-groups.security_group_id
     },
   ]
 number_of_computed_egress_with_source_security_group_id = 1
