@@ -14,7 +14,7 @@ locals {
   user_data = <<-EOT
  #!/bin/bash
 
-#Uninstall Unofficial versions 
+echo "#Uninstall Unofficial versions 
 
 for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt remove $pkg -y; done
 
@@ -50,7 +50,8 @@ sudo chmod 666 /var/run/docker.sock
 # Run OWASP Juice Shop Container
 
 docker pull bkimminich/juice-shop
-docker run -d -p 80:3000 bkimminich/juice-shop
+docker run -d -p 80:3000 bkimminich/juice-shop" >> /var/www/html/index.html
+echo "My Health Page" >> /var/www/html/health.html
     
   EOT
  domain = var.domain_name
