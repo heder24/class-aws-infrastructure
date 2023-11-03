@@ -574,14 +574,14 @@ output "private-security-groups_security_group_id" {
   value       = module.private-security-groups.security_group_id
 }
 ############################ IAM ########################
-output "base-ec2-role" {
+output "iam" {
   description = "The ID of the security group"
-  value       = module.base-ec2-role.iam_role_name
+  value       = module.iam.iam_role_name
 }
 
 output "iam_instance_profile_id" {
   description = "IAM Instance profile's ID."
-  value       = module.base-ec2-role.iam_instance_profile_id
+  value       = module.iam.iam_instance_profile_id
 }
 
 

@@ -229,7 +229,7 @@ module "autoscaling" {
   user_data         = base64encode(local.user_data)
   enable_monitoring = true
   create_iam_instance_profile = false
-  iam_instance_profile_name = module.base-ec2-role.iam_instance_profile_id
+  iam_instance_profile_name = module.iam.iam_instance_profile_id
   target_group_arns = module.alb.target_group_arns
 
   network_interfaces = [
