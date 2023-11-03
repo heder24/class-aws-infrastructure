@@ -2,7 +2,7 @@
 module "vpc" {
   source  = "app.terraform.io/heder24/vpc/aws"
   version = "1.0.0"
-   name = local.name
+  name = local.name
   cidr = local.vpc_cidr
 
   azs             = local.azs
@@ -37,28 +37,28 @@ module "vpc" {
 
   tags = local.tags
 }
-# module "acm" {
-#   source  = "app.terraform.io/heder24/acm/aws"
-#   version = "1.0.0"
-#   providers = {
-#     aws.acm = aws,
-#     aws.dns = aws
-#   }
+module "acm" {
+  source  = "app.terraform.io/heder24/acm/aws"
+  version = "1.0.0"
+  providers = {
+    aws.acm = aws,
+    aws.dns = aws
+  }
 
-#   domain_name = local.domain_name
-#   zone_id     = local.zone_id
+  domain_name = local.domain_name
+  zone_id     = local.zone_id
   
 
-#   subject_alternative_names = [
-#     "www.qa.${local.domain_name}",
-#     "www.stage.${local.domain_name}",
-#     "*.${local.domain_name}",
-#   ]
+  subject_alternative_names = [
+    "www.qa.${local.domain_name}",
+    "www.stage.${local.domain_name}",
+    "*.${local.domain_name}",
+  ]
 
-#   tags = {
-#     Name = local.domain_name
-#   }
-# }
+  tags = {
+    Name = local.domain_name
+  }
+}
 
 module "alb" {
   source  = "app.terraform.io/heder24/alb/aws"
