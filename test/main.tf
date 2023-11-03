@@ -429,8 +429,7 @@ module "security-groups" {
 
 }
 
-
-module "security-groups" {
+module "private-security-groups" {
   source = "app.terraform.io/heder24/security-groups/aws"
 
   name        = var.private_sg 
@@ -487,7 +486,7 @@ module "security-groups" {
 
 }
 
-module "security-groups" {
+module "bastion-security-group" {
   source = "app.terraform.io/heder24/security-groups/aws"
 
   name        = "prod-bastion-sg" 
