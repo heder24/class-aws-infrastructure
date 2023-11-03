@@ -273,7 +273,7 @@ module "ec2" {
   associate_public_ip_address = true
   disable_api_stop            = false
   key_name = var.key_name
-  iam_instance_profile= module.base-ec2-role.iam_instance_profile_id
+  iam_instance_profile= module.iam.iam_instance_profile_id
   create_iam_instance_profile = false
   # user_data_base64            = base64encode(local.user_data)
   user_data_replace_on_change = true
@@ -283,7 +283,7 @@ module "ec2" {
 }
 
 resource "aws_eip_association" "eip_assoc" {
-  instance_id   = module.prod_bastion.id
+  instance_id   = module.ec2.id
   allocation_id = data.aws_eip.bastion_eip.id
 }
 
@@ -430,7 +430,7 @@ module "security-groups" {
 }
 
 
-module "private_sg" {
+module "security-groups" {
   source = "app.terraform.io/heder24/security-groups/aws"
 
   name        = var.private_sg 
@@ -487,7 +487,7 @@ module "private_sg" {
 
 }
 
-module "bastion_sg" {
+module "security-groups" {
   source = "app.terraform.io/heder24/security-groups/aws"
 
   name        = "prod-bastion-sg" 
