@@ -140,11 +140,11 @@ output "ami_id" {
   value = data.aws_ami.ubuntu.id
 }
 
-data "aws_route53_zone" "hederdevops" {
-  name         = "hederdevops.com."
+# data "aws_route53_zone" "hederdevops" {
+#   name         = "hederdevops.com."
   
-}
-output "zone_id" {
+# }
+# output "zone_id" {
 
-  value = data.aws_route53_zone.id
-}
+#   value = data.aws_route53_zone.id
+# }
