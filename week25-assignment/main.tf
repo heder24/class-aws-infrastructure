@@ -104,7 +104,7 @@ module "security-groups" {
 module "route53" {
  source  = "app.terraform.io/heder24/route53/aws"
   version = "1.0.0"
-  # zone_id = local.zone_id
+  zone_id = data.aws_route53_zone.id
    records = [
     {
       name = var.juice-name
@@ -138,4 +138,13 @@ data "aws_ami" "ubuntu" {
 output "ami_id" {
 
   value = data.aws_ami.ubuntu.id
+}
+
+data "aws_route53_zone" "hederdevops" {
+  name         = "hederdevops.com."
+  
+}
+output "zone_id" {
+
+  value = data.aws_route53_zone.id
 }
