@@ -110,11 +110,11 @@ module "route53" {
       name = var.juice-name
       full_name_override = true
       type = "A"
-        alias = {
+        
           records = [
             module.ec2.public_ip
           ]
-      }
+      
       value =  module.ec2.public_ip
     },
    ]
