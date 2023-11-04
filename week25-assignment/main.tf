@@ -107,7 +107,7 @@ module "route53" {
   zone_name= "hederdevops.com."
    records = [
     {
-      name = var.juice-name
+      name = "www"
       full_name_override = true
       type = "A"
         
