@@ -115,12 +115,19 @@ module "route53" {
             module.ec2.public_ip
           ]
       
+      name = "*"
+      full_name_override = true
+      type = "A"
+         ttl  = 3600
+          records = [
+            module.ec2.public_ip
+          ]
       
     },
    ]
 }
 
-output "web-address" {
+output "juice-address" {
   value = module.ec2.public_ip
 }
 
@@ -145,11 +152,3 @@ output "ami_id" {
   value = data.aws_ami.ubuntu.id
 }
 
-# data "aws_route53_zone" "hederdevops" {
-#   name         = "hederdevops.com."
-  
-# }
-# output "zone_id" {
-
-#   value = data.aws_route53_zone.id
-# }
