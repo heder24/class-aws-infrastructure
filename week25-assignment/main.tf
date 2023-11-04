@@ -23,7 +23,7 @@ module "security-groups" {
   source  = "app.terraform.io/heder24/security-groups/aws"
   version = "1.0.0"
 
- name        = juice-sg
+ name        = "juice-sg"
 #   vpc_id      = module.vpc.vpc_id
 
   ingress_with_cidr_blocks = [
