@@ -104,17 +104,38 @@ module "security-groups" {
 module "route53" {
  source  = "app.terraform.io/heder24/route53/aws"
   version = "1.0.0"
-  zone_id = local.zone_id
+  # zone_id = local.zone_id
    records = [
     {
       name = var.juice-name
       full_name_override = true
       type = "A"
-      value =  module.ec2.public_ip_address
+      value =  module.ec2.public_ip
     },
    ]
 }
 
 output "web-address" {
-  value = module.ec2.public_ip_address
+  value = module.ec2.public_ip
+}
+
+data "aws_ami" "ubuntu" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["099720109477"] # Canonical
+}
+
+output "ami_id" {
+
+  value = data.aws_ami.ubuntu.id
 }

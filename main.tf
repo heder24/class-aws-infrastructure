@@ -42,3 +42,24 @@ resource "aws_security_group" "web-sg" {
 output "web-address" {
   value = aws_instance.web.public_dns
 }
+
+data "aws_ami" "ubuntu" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["099720109477"] # Canonical
+}
+
+output "ami_id" {
+
+  value = data.aws_ami.ubuntu.id
+}
