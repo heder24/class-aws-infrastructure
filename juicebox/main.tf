@@ -320,21 +320,21 @@ module "alb" {
     },
   ]
 
-  https_listeners = [
-    {
-      port               = 443
-      protocol           = "HTTPS"
-      certificate_arn    = module.acm.acm_certificate_arn
-      target_group_index = 0
-      action_type        = "fixed-response"
-      fixed_response = {
-        content_type = "text/plain"
-        message_body = ""
-        status_code  = "404"
-      }
-    },
+#   https_listeners = [
+#     {
+#       port               = 443
+#       protocol           = "HTTPS"
+#       certificate_arn    = module.acm.acm_certificate_arn
+#       target_group_index = 0
+#       action_type        = "fixed-response"
+#       fixed_response = {
+#         content_type = "text/plain"
+#         message_body = ""
+#         status_code  = "404"
+#       }
+#     },
 
-  ]
+#   ]
 
   https_listener_rules = [
     {
