@@ -126,7 +126,6 @@ module "public_sg" {
 
 }
 
-
 module "private_sg" {
     source  = "app.terraform.io/heder24/private-security-groups/aws"
   version = "1.0.0"
