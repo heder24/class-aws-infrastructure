@@ -311,10 +311,11 @@ module "alb" {
     {
       port        = 80
       protocol    = "HTTP"
-      action_type = "forward"
+      action_type = "redirect"
       redirect = {
         port        = "80"
         protocol    = "HTTP"
+        status_code ="302"
         URL = "www.hederdevops.com"
       }
     },
