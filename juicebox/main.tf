@@ -336,57 +336,57 @@ module "alb" {
 
 #   ]
 
-  https_listener_rules = [
-    {
-      https_listener_index = 0
-      # priority             = 1
-      actions = [
-        {
-          type       = "forward"
-          target_group_index = 0
-        }
-      ]
-      conditions = [{
-        host_headers = [var.prod_domain_name, var.domain_name]
+#   https_listener_rules = [
+#     {
+#       https_listener_index = 0
+#       # priority             = 1
+#       actions = [
+#         {
+#           type       = "forward"
+#           target_group_index = 0
+#         }
+#       ]
+#       conditions = [{
+#         host_headers = [var.prod_domain_name, var.domain_name]
 
         
-      }]
+#       }]
       
-    },
+#     },
 
-{
-      https_listener_index = 0
-      # priority             = 1
-      actions = [
-        {
-          type       = "forward"
-          target_group_index = 0
-        }
-      ]
-      conditions = [{
-        host_headers = [var.stage_domain_name, var.host_header_stage_domain_name]
-
-        
-      }]
-      
-    },
-{
-      https_listener_index = 0
-      # priority             = 1
-      actions = [
-        {
-          type       = "forward"
-          target_group_index = 0
-        }
-      ]
-      conditions = [{
-        host_headers = [var.qa_domain_name, var.host_header_qa_domain_name]
+# {
+#       https_listener_index = 0
+#       # priority             = 1
+#       actions = [
+#         {
+#           type       = "forward"
+#           target_group_index = 0
+#         }
+#       ]
+#       conditions = [{
+#         host_headers = [var.stage_domain_name, var.host_header_stage_domain_name]
 
         
-      }]
+#       }]
       
-    },
-  ]
+#     },
+# {
+#       https_listener_index = 0
+#       # priority             = 1
+#       actions = [
+#         {
+#           type       = "forward"
+#           target_group_index = 0
+#         }
+#       ]
+#       conditions = [{
+#         host_headers = [var.qa_domain_name, var.host_header_qa_domain_name]
+
+        
+#       }]
+      
+#     },
+#   ]
 
    
   target_groups = [
