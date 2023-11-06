@@ -311,13 +311,13 @@ module "alb" {
     {
       port        = 80
       protocol    = "HTTP"
-      action_type = "redirect"
-      redirect = {
-        port        = "80"
-        protocol    = "HTTP"
-        status_code ="HTTP_302"
-        URL = "www.hederdevops.com"
-      }
+      action_type = "forward"
+    #   redirect = {
+    #     port        = "80"
+    #     protocol    = "HTTP"
+    #     status_code ="HTTP_302"
+        
+      #
     },
   ]
 
@@ -407,7 +407,7 @@ module "alb" {
         unhealthy_threshold = 3
         timeout             = 6
         protocol            = "HTTP"
-        matcher             = "200-399"
+        
       }
       
 
