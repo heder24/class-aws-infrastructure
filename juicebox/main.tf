@@ -226,7 +226,7 @@ number_of_computed_egress_with_source_security_group_id = 1
 
 ###################################### IAM #################################
 
-module "iam" {
+module "base-ec2-role" {
     source  = "app.terraform.io/heder24/iam/aws"
   version = "1.0.0"
 
