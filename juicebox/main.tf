@@ -306,19 +306,19 @@ module "alb" {
   subnets = module.vpc.public_subnets
   security_groups = [module.public_sg.security_group_id]
   
-  http_tcp_listeners = [
+#   http_tcp_listeners = [
  
-    {
-      port        = 80
-      protocol    = "HTTP"
-      action_type = "redirect"
-      redirect = {
-        port        = "443"
-        protocol    = "HTTPS"
-        status_code = "HTTP_301"
-      }
-    },
-  ]
+#     {
+#       port        = 80
+#       protocol    = "HTTP"
+#       action_type = "redirect"
+#       redirect = {
+#         port        = "443"
+#         protocol    = "HTTPS"
+#         status_code = "HTTP_301"
+#       }
+#     },
+#   ]
 
 #   https_listeners = [
 #     {
