@@ -465,7 +465,7 @@ module "prod_asg" {
   image_id          = data.aws_ami.ubuntu.id
   key_name = var.key_name
   instance_type     = "t2.micro"
-  user_data         = base64encode(local.user_data)
+  user_data         = base64encode(file("user-data.sh"))
   enable_monitoring = true
   create_iam_instance_profile = false
   iam_instance_profile_name = module.base-ec2-role.iam_instance_profile_id
