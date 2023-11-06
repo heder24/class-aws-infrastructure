@@ -315,7 +315,7 @@ module "alb" {
       redirect = {
         port        = "80"
         protocol    = "HTTP"
-        status_code ="302"
+        status_code ="HTTP_302"
         URL = "www.hederdevops.com"
       }
     },
