@@ -6,12 +6,12 @@ locals {
   azs      = slice(data.aws_availability_zones.available.names, 0, 3)
 
   tags = {
-    Name    = local.name
+    Name       = local.name
     GithubRepo = "heder-class-devops"
     GithubOrg  = "hederdevops"
   }
-# domain_name = "hederdevops.com"
-  user_data = <<-EOT
+  # domain_name = "hederdevops.com"
+  user_data                 = <<-EOT
     #!/bin/bash
     sudo apt update -y 
     sudo apt install nginx -y 
@@ -19,9 +19,9 @@ locals {
     echo "My Health Page" >> /var/www/html/health.html
     
   EOT
- domain = var.domain_name
-  domain_name = local.domain
-  zone_id= data.aws_route53_zone.heder_lab_zone.id
+  domain                    = var.domain_name
+  domain_name               = local.domain
+  zone_id                   = data.aws_route53_zone.heder_lab_zone.id
   use_existing_route53_zone = true
 }
 

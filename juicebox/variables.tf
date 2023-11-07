@@ -44,9 +44,9 @@ variable "host_header_qa_domain_name" {
   default = "qa.hederdevops.com"
 }
 
-variable "all_domain_name" {
+variable "host_domain_name" {
   type    = string
-  default = "*hederdevops.com"
+  default = "hederdevops.com"
 }
 
 #health path

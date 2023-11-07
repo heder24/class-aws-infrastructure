@@ -3,7 +3,7 @@
 ################################################################################
 
 module "vpc" {
-    source  = "app.terraform.io/heder24/vpc/aws"
+  source  = "app.terraform.io/heder24/vpc/aws"
   version = "1.0.0"
 
   name = local.name
@@ -42,97 +42,99 @@ module "vpc" {
   tags = local.tags
 }
 
-##################################### SG #####################################
+################################################################################
+# Security groups modules
+################################################################################
 
 module "public_sg" {
-   source  = "app.terraform.io/heder24/public-security-groups/aws"
+  source  = "app.terraform.io/heder24/public-security-groups/aws"
   version = "1.0.0"
 
-  name        = var.public_sg 
-  vpc_id      = module.vpc.vpc_id
+  name   = var.public_sg
+  vpc_id = module.vpc.vpc_id
 
   ingress_with_cidr_blocks = [
-   {
-    description = "Allow HTTPS from public IPV4"
-    from_port   = 443
-    to_port     = 443
-    protocol    = 6
-    cidr_blocks = "0.0.0.0/0"
-    
-  },
-   {
-    description = "Allow HTTP from public IPV4"
-    from_port   = 80
-    to_port     = 80
-    protocol    = 6
-    cidr_blocks = "0.0.0.0/0"
-    
-  },
+    {
+      description = "Allow HTTPS from public IPV4"
+      from_port   = 443
+      to_port     = 443
+      protocol    = 6
+      cidr_blocks = "0.0.0.0/0"
+
+    },
+    {
+      description = "Allow HTTP from public IPV4"
+      from_port   = 80
+      to_port     = 80
+      protocol    = 6
+      cidr_blocks = "0.0.0.0/0"
+
+    },
 
   ]
 
   ingress_with_ipv6_cidr_blocks = [
-   {
-    description      = "HTTPS from public IPV6"
-    from_port        = 443
-    to_port          = 443
-    protocol         = 6
-    ipv6_cidr_blocks = "::/0"
-  },
-   {
-    description      = "HTTP from public IPV6"
-    from_port        = 80
-    to_port          = 80
-    protocol         = 6
-    ipv6_cidr_blocks = "::/0"
-  },
+    {
+      description      = "HTTPS from public IPV6"
+      from_port        = 443
+      to_port          = 443
+      protocol         = 6
+      ipv6_cidr_blocks = "::/0"
+    },
+    {
+      description      = "HTTP from public IPV6"
+      from_port        = 80
+      to_port          = 80
+      protocol         = 6
+      ipv6_cidr_blocks = "::/0"
+    },
 
   ]
 
   egress_with_cidr_blocks = [
-   {
-    description = "HTTPS to anywhere IPV4"
-    from_port   = 443
-    to_port     = 443
-    protocol    = 6
-    cidr_blocks = "0.0.0.0/0"
-   },
     {
-    description = "HTTP to anywhere IPV4"
-    from_port   = 80
-    to_port     = 80
-    protocol    = 6
-    cidr_blocks = "0.0.0.0/0"
-   },
+      description = "HTTPS to anywhere IPV4"
+      from_port   = 443
+      to_port     = 443
+      protocol    = 6
+      cidr_blocks = "0.0.0.0/0"
+    },
+    {
+      description = "HTTP to anywhere IPV4"
+      from_port   = 80
+      to_port     = 80
+      protocol    = 6
+      cidr_blocks = "0.0.0.0/0"
+    },
   ]
 
   egress_with_ipv6_cidr_blocks = [
- {
-    description = "HTTP to anywhere IPV4"
-    from_port   = 80
-    to_port     = 80
-    protocol    = 6
-    ipv6_cidr_blocks = "::/0"
-  },
- {
-    description = "HTTPS to anywhere IPV4"
-    from_port   = 443
-    to_port     = 443
-    protocol    = 6
-    ipv6_cidr_blocks = "::/0"
-  },
+    {
+      description      = "HTTP to anywhere IPV4"
+      from_port        = 80
+      to_port          = 80
+      protocol         = 6
+      ipv6_cidr_blocks = "::/0"
+    },
+    {
+      description      = "HTTPS to anywhere IPV4"
+      from_port        = 443
+      to_port          = 443
+      protocol         = 6
+      ipv6_cidr_blocks = "::/0"
+    },
 
   ]
 
 }
 
 module "private_sg" {
-    source  = "app.terraform.io/heder24/private-security-groups/aws"
+  source  = "app.terraform.io/heder24/private-security-groups/aws"
   version = "1.0.0"
 
-  name        = var.private_sg 
-  vpc_id      = module.vpc.vpc_id
- 
+  name   = var.private_sg
+  vpc_id = module.vpc.vpc_id
+
   computed_ingress_with_source_security_group_id = [
 
     {
@@ -142,15 +144,15 @@ module "private_sg" {
       description              = "SSH from bastion"
       source_security_group_id = module.bastion_sg.security_group_id
     },
- 
+
     {
       from_port                = 443
       to_port                  = 443
       protocol                 = 6
       description              = "HTTPS"
-       source_security_group_id = module.public_sg.security_group_id
+      source_security_group_id = module.public_sg.security_group_id
     },
- 
+
 
     {
       from_port                = 80
@@ -161,7 +163,7 @@ module "private_sg" {
     },
 
   ]
-     number_of_computed_ingress_with_source_security_group_id = 3
+  number_of_computed_ingress_with_source_security_group_id = 3
   egress_with_cidr_blocks = [
     {
       from_port   = 0
@@ -171,47 +173,47 @@ module "private_sg" {
 
     },
   ]
- egress_with_ipv6_cidr_blocks = [
- {
-    description = "HTTP to anywhere IPV4"
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    ipv6_cidr_blocks = "::/0"
-  },
+  egress_with_ipv6_cidr_blocks = [
+    {
+      description      = "HTTP to anywhere IPV4"
+      from_port        = 0
+      to_port          = 0
+      protocol         = "-1"
+      ipv6_cidr_blocks = "::/0"
+    },
 
- ]
+  ]
 
 }
 
 module "bastion_sg" {
-    source  = "app.terraform.io/heder24/bastion-security-group/aws"
+  source  = "app.terraform.io/heder24/bastion-security-group/aws"
   version = "1.0.0"
 
-  name        = "prod-bastion-sg" 
-  vpc_id      = module.vpc.vpc_id
+  name   = "prod-bastion-sg"
+  vpc_id = module.vpc.vpc_id
 
   ingress_with_cidr_blocks = [
-   {
-    description = "Allow SSH from public IPV4"
-    from_port   = 22
-    to_port     = 22
-    protocol    = 6
-    cidr_blocks = "0.0.0.0/0"
-  },
+    {
+      description = "Allow SSH from public IPV4"
+      from_port   = 22
+      to_port     = 22
+      protocol    = 6
+      cidr_blocks = "0.0.0.0/0"
+    },
   ]
 
   ingress_with_ipv6_cidr_blocks = [
-   {
-    description      = "Allow SSH from public IPV6"
-    from_port        = 22
-    to_port          = 22
-    protocol         = 6
-    ipv6_cidr_blocks = "::/0"
+    {
+      description      = "Allow SSH from public IPV6"
+      from_port        = 22
+      to_port          = 22
+      protocol         = 6
+      ipv6_cidr_blocks = "::/0"
 
-  },
+    },
   ]
- computed_egress_with_source_security_group_id = [
+  computed_egress_with_source_security_group_id = [
     {
       from_port                = 22
       to_port                  = 22
@@ -220,14 +222,15 @@ module "bastion_sg" {
       source_security_group_id = module.private_sg.security_group_id
     },
   ]
-number_of_computed_egress_with_source_security_group_id = 1
+  number_of_computed_egress_with_source_security_group_id = 1
 }
 
-
-###################################### IAM #################################
+################################################################################
+# IAM Module
+################################################################################
 
 module "base-ec2-role" {
-    source  = "app.terraform.io/heder24/iam/aws"
+  source  = "app.terraform.io/heder24/iam/aws"
   version = "1.0.0"
 
   trusted_role_services = [
@@ -243,71 +246,61 @@ module "base-ec2-role" {
   custom_role_policy_arns = [
     "arn:aws:iam::aws:policy/AmazonS3FullAccess",
     "arn:aws:iam::aws:policy/AmazonSSMFullAccess",
-    
+
   ]
 }
 
-
-############################### Route53 Records #############################
+################################################################################
+# DNS records Module
+################################################################################
 
 module "dns_records" {
-    source  = "app.terraform.io/heder24/route53/aws"
+  source  = "app.terraform.io/heder24/route53/aws"
   version = "1.0.0"
   zone_id = local.zone_id
-   records = [
+  records = [
     {
-      name = var.prod_domain_name
+      name               = var.prod_domain_name
       full_name_override = true
-      type = "A"
-       alias = {
-        name    = module.alb.lb_dns_name
-        zone_id =  module.alb.lb_zone_id
+      type               = "A"
+      alias = {
+        name                   = module.alb.lb_dns_name
+        zone_id                = module.alb.lb_zone_id
         evaluate_target_health = true
       }
     },
     {
-      name = var.qa_domain_name
+      name               = var.host_domain_name
       full_name_override = true
-      type = "A"
-       alias = {
-        name    = module.alb.lb_dns_name
-        zone_id =  module.alb.lb_zone_id
+      type               = "A"
+      alias = {
+        name                   = module.alb.lb_dns_name
+        zone_id                = module.alb.lb_zone_id
         evaluate_target_health = true
       }
-    }, 
-    {
-      name = var.stage_domain_name
-      full_name_override = true
-      type = "A"
-       alias = {
-        name    = module.alb.lb_dns_name
-        zone_id =  module.alb.lb_zone_id
-        evaluate_target_health = true
-      }
-    },   
-]
-}
+    },
 
-############################################ ALB ##############################################
+  ]
+}
 
 ##################################################################
 # Application Load Balancer
 ##################################################################
 
 module "alb" {
-    source  = "app.terraform.io/heder24/alb/aws"
+  source  = "app.terraform.io/heder24/alb/aws"
   version = "1.0.0"
 
   name = local.name
 
   load_balancer_type = "application"
 
-  vpc_id  = module.vpc.vpc_id
-  subnets = module.vpc.public_subnets
+  vpc_id          = module.vpc.vpc_id
+  subnets         = module.vpc.public_subnets
   security_groups = [module.public_sg.security_group_id]
-  
+
   http_tcp_listeners = [
- 
+
     {
       port        = 80
       protocol    = "HTTP"
@@ -332,32 +325,28 @@ module "alb" {
         unhealthy_threshold = 3
         timeout             = 6
         protocol            = "HTTP"
-        
+
       }
-      
-
-
       tags = {
         InstanceTargetGroupTag = "prod"
       }
     },
   ]
-
-
   lb_tags = {
     MyLoadBalancer = "prod-lb"
   }
 
 }
-
-################################ ASG #############################
+##################################################################
+# Auto Scaling Group
+##################################################################
 
 module "prod_asg" {
-    source  = "app.terraform.io/heder24/autoscaling/aws"
+  source  = "app.terraform.io/heder24/autoscaling/aws"
   version = "1.0.0"
 
   # Autoscaling group
-  name            = "${local.name}"
+  name            = local.name
   use_name_prefix = false
   instance_name   = "prod-web"
 
@@ -376,14 +365,14 @@ module "prod_asg" {
   launch_template_description = "prod launch template"
   update_default_version      = true
 
-  image_id          = data.aws_ami.ubuntu.id
-  key_name = var.key_name
-  instance_type     = "t2.micro"
-  user_data         = base64encode(file("user-data.sh"))
-  enable_monitoring = true
+  image_id                    = data.aws_ami.ubuntu.id
+  key_name                    = var.key_name
+  instance_type               = "t2.micro"
+  user_data                   = base64encode(file("user-data.sh"))
+  enable_monitoring           = true
   create_iam_instance_profile = false
-  iam_instance_profile_name = module.base-ec2-role.iam_instance_profile_id
-  target_group_arns = module.alb.target_group_arns
+  iam_instance_profile_name   = module.base-ec2-role.iam_instance_profile_id
+  target_group_arns           = module.alb.target_group_arns
 
   network_interfaces = [
     {
@@ -408,7 +397,7 @@ module "prod_asg" {
       resource_type = "volume"
       tags          = merge({ WhatAmI = "Volume" })
     },
- 
+
   ]
 
   tags = local.tags
@@ -419,10 +408,10 @@ module "prod_asg" {
 ################################################################################
 
 module "prod_bastion" {
-    source  = "app.terraform.io/heder24/ec2/aws"
+  source  = "app.terraform.io/heder24/ec2/aws"
   version = "1.0.0"
 
-  name = var.bastion
+  name                        = var.bastion
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = "t2.micro" # used to set core count below
   availability_zone           = element(module.vpc.azs, 0)
@@ -430,8 +419,8 @@ module "prod_bastion" {
   vpc_security_group_ids      = [module.bastion_sg.security_group_id]
   associate_public_ip_address = true
   disable_api_stop            = false
-  key_name = var.key_name
-  iam_instance_profile= module.base-ec2-role.iam_instance_profile_id
+  key_name                    = var.key_name
+  iam_instance_profile        = module.base-ec2-role.iam_instance_profile_id
   create_iam_instance_profile = false
   # user_data_base64            = base64encode(local.user_data)
   user_data_replace_on_change = true
