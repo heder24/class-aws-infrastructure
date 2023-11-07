@@ -312,84 +312,9 @@ module "alb" {
       port        = 80
       protocol    = "HTTP"
       action_type = "forward"
-    #   redirect = {
-    #     port        = "80"
-    #     protocol    = "HTTP"
-    #     status_code ="HTTP_302"
-        
-      #
     },
   ]
 
-#   https_listeners = [
-#     {
-#       port               = 443
-#       protocol           = "HTTPS"
-#       certificate_arn    = module.acm.acm_certificate_arn
-#       target_group_index = 0
-#       action_type        = "fixed-response"
-#       fixed_response = {
-#         content_type = "text/plain"
-#         message_body = ""
-#         status_code  = "404"
-#       }
-#     },
-
-#   ]
-
-#   https_listener_rules = [
-#     {
-#       https_listener_index = 0
-#       # priority             = 1
-#       actions = [
-#         {
-#           type       = "forward"
-#           target_group_index = 0
-#         }
-#       ]
-#       conditions = [{
-#         host_headers = [var.prod_domain_name, var.domain_name]
-
-        
-#       }]
-      
-#     },
-
-# {
-#       https_listener_index = 0
-#       # priority             = 1
-#       actions = [
-#         {
-#           type       = "forward"
-#           target_group_index = 0
-#         }
-#       ]
-#       conditions = [{
-#         host_headers = [var.stage_domain_name, var.host_header_stage_domain_name]
-
-        
-#       }]
-      
-#     },
-# {
-#       https_listener_index = 0
-#       # priority             = 1
-#       actions = [
-#         {
-#           type       = "forward"
-#           target_group_index = 0
-#         }
-#       ]
-#       conditions = [{
-#         host_headers = [var.qa_domain_name, var.host_header_qa_domain_name]
-
-        
-#       }]
-      
-#     },
-#   ]
-
-   
   target_groups = [
     {
       name_prefix                       = "prod"
@@ -423,17 +348,6 @@ module "alb" {
     MyLoadBalancer = "prod-lb"
   }
 
-  https_listener_rules_tags = {
-    MyLoadBalancerHTTPSListenerRule = "prod-listener"
-  }
-
-  https_listeners_tags = {
-    MyLoadBalancerHTTPSListener = "prod-listener"
-  }
-
-  http_tcp_listeners_tags = {
-    MyLoadBalancerTCPListener = "prod-listener"
-  }
 }
 
 ################################ ASG #############################
