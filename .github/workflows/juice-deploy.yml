@@ -63,7 +63,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: "/jucebox"
+        working-directory: "../juicebox"
 
     steps:
     # Checkout the repository to the GitHub Actions runner
