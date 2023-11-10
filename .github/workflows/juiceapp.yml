@@ -50,8 +50,8 @@ on:
   pull_request:
 
 permissions: write-all
-  contents: read
-  issues: write
+  # contents: read
+  # issues: write
 
 jobs:
   terraform:
