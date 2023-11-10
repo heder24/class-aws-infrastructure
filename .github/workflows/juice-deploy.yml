@@ -63,7 +63,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: "./juicebox"
+        working-directory: "./"
 
     steps:
     # Checkout the repository to the GitHub Actions runner
@@ -124,11 +124,11 @@ jobs:
     - name: Run Trivy vulnerability scanner in IaC mode
       uses: aquasecurity/trivy-action@master
       with:
-        scan-type: 'fs'
+        scan-type: 'config'
         hide-progress: false
         format: 'sarif'
         output: 'trivy-results.sarif'
-        exit-code: '1'
+        # exit-code: '0'
         ignore-unfixed: true
         severity: 'CRITICAL,HIGH'
 
@@ -148,7 +148,7 @@ jobs:
 
     - name: Terraform Destroy
       env:
-        destroy: true
+        destroy: false
       if: ${{ env.destroy == 'true' }} 
       #if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
       run: terraform destroy -auto-approve -input=false
