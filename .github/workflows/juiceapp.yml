@@ -148,21 +148,20 @@ jobs:
     #     # Path to SARIF file relative to the root of the repository
     #     sarif_file: tfsec.sarif
 
-    - name: Run Trivy vulnerability scanner in IaC mode
-      uses: aquasecurity/trivy-action@master
+    - name: Run Snyk to check configuration files for security issues
+      # Snyk can be used to break the build when it detects security issues.
+      # In this case we want to upload the issues to GitHub Code Scanning
+      continue-on-error: true
+      uses: snyk/actions/iac@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
-        scan-type: 'config'
-        hide-progress: false
-        format: 'sarif'
-        output: 'trivy.scan'
-        # exit-code: '0'
-        ignore-unfixed: true
-        # severity: 'CRITICAL,HIGH'
-
-    - name: Upload Trivy scan results to GitHub Security tab
+        args: --sarif-file-output=snyk.scan.sarif
+        sarif: false
+    - name: Upload result to GitHub Code Scanning
       uses: github/codeql-action/upload-sarif@v2
       with:
-        sarif_file: 'trivy.scan'
+        sarif_file: snyk.scan.sarif
     #On push to "main", build or change infrastructure according to Terraform configuration files
     #Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
