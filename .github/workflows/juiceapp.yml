@@ -127,7 +127,7 @@ jobs:
         scan-type: 'config'
         hide-progress: false
         format: 'sarif'
-        output: 'trivy.scan.sarif'
+        output: 'trivy.scan'
         # exit-code: '0'
         ignore-unfixed: true
         severity: 'CRITICAL,HIGH'
