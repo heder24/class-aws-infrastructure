@@ -127,7 +127,7 @@ jobs:
         scan-type: 'config'
         hide-progress: false
         format: 'sarif'
-        output: 'trivy-scan.sarif'
+        output: 'trivy.scan.sarif'
         # exit-code: '0'
         ignore-unfixed: true
         severity: 'CRITICAL,HIGH'
@@ -135,7 +135,7 @@ jobs:
     - name: Upload Trivy scan results to GitHub Security tab
       uses: github/codeql-action/upload-sarif@v2
       with:
-        sarif_file: 'trivy-scan.sarif'
+        sarif_file: 'trivy.scan.sarif'
 
     # - name: Run tfsec
     #   uses: aquasecurity/tfsec-sarif-action@9a83b5c3524f825c020e356335855741fd02745f
