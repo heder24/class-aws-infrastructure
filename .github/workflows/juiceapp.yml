@@ -121,6 +121,33 @@ jobs:
           })
 
     #Scan Terraform Config for Vulnerabilities
+    # - name: Run Trivy vulnerability scanner in IaC mode
+    #   uses: aquasecurity/trivy-action@master
+    #   with:
+    #     scan-type: 'config'
+    #     hide-progress: false
+    #     format: 'sarif'
+    #     output: 'trivy.scan'
+    #     # exit-code: '0'
+    #     ignore-unfixed: true
+    #     # severity: 'CRITICAL,HIGH'
+
+    # - name: Upload Trivy scan results to GitHub Security tab
+    #   uses: github/codeql-action/upload-sarif@v2
+    #   with:
+    #     sarif_file: 'trivy.scan'
+
+    # - name: Run tfsec
+    #   uses: aquasecurity/tfsec-sarif-action@9a83b5c3524f825c020e356335855741fd02745f
+    #   with:
+    #     sarif_file: tfsec.sarif
+
+    # - name: Upload SARIF file
+    #   uses: github/codeql-action/upload-sarif@v2
+    #   with:
+    #     # Path to SARIF file relative to the root of the repository
+    #     sarif_file: tfsec.sarif
+
     - name: Run Trivy vulnerability scanner in IaC mode
       uses: aquasecurity/trivy-action@master
       with:
@@ -136,19 +163,6 @@ jobs:
       uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: 'trivy.scan'
-
-    # - name: Run tfsec
-    #   uses: aquasecurity/tfsec-sarif-action@9a83b5c3524f825c020e356335855741fd02745f
-    #   with:
-    #     sarif_file: tfsec.sarif
-
-    # - name: Upload SARIF file
-    #   uses: github/codeql-action/upload-sarif@v2
-    #   with:
-    #     # Path to SARIF file relative to the root of the repository
-    #     sarif_file: tfsec.sarif
-
-
     #On push to "main", build or change infrastructure according to Terraform configuration files
     #Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
